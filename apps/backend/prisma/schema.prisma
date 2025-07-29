@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  senha        String
+  altura       Float
+  peso         Float
+  objetivo     String
+  diasSemana   Int
+  tipo         String   @default("comum")
+  criadoEm     DateTime @default(now())
+  checkins     Checkin[]
+  friends      Friend[] @relation("UserFriends")
+  friendOf     Friend[] @relation("FriendOfUser")
+  rankings     Ranking[]
+  friendInvites FriendInvite[]
+  workouts     Workout[]
+  diets        Diet[]
+  fotoPerfil   String?
+}
+
+model Diet {
+  id         Int      @id @default(autoincrement())
+  calorias   Float
+  proteinas  Float
+  carbs      Float
+  gorduras   Float
+  horarios   String
+  criadoEm   DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Workout {
+  id         Int      @id @default(autoincrement())
+  divisao    String
+  reps       Int
+  cargas     String
+  descanso   Int
+  criadoEm   DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Ranking {
+  id         Int      @id @default(autoincrement())
+  pontos     Int
+  foto       String?
+  criadoEm   DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Checkin {
+  id        Int      @id @default(autoincrement())
+  fotoUrl   String
+  legenda   String
+  criadoEm  DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Friend {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  friendId  Int
+  criadoEm  DateTime @default(now())
+  user      User     @relation("UserFriends", fields: [userId], references: [id])
+  friend    User     @relation("FriendOfUser", fields: [friendId], references: [id])
+}
+
+model FriendInvite {
+  token      String   @id
+  inviterId  Int
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  inviter    User     @relation(fields: [inviterId], references: [id])
+}

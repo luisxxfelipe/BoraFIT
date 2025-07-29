@@ -1,0 +1,13 @@
+-- CreateTable
+CREATE TABLE `Ranking` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `pontos` INTEGER NOT NULL,
+    `foto` VARCHAR(191) NULL,
+    `criadoEm` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `userId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Ranking` ADD CONSTRAINT `Ranking_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
