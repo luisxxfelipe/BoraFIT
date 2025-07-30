@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import workoutRoutes from './routes/workoutRoutes';
@@ -10,15 +11,14 @@ import monthlyResetRoutes from './routes/monthlyResetRoutes';
 import { setupSwagger } from './swagger';
 
 const app = express();
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 const PORT = process.env.PORT || 3000;
 
-// Middleware para JSON
 app.use(express.json());
 
-// Configuração do Swagger
 setupSwagger(app);
 
-// Rota de teste
 app.get('/', (req, res) => {
   res.send('BoraFIT backend rodando!');
 });

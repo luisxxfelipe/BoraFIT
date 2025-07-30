@@ -1,10 +1,6 @@
-import { Router, Request, Response } from 'express';
+import { Router} from 'express';
 import { authenticateJWT } from '../middlewares/authMiddleware';
 import { createDietController, getDietController, listDietsController, updateDietController, deleteDietController } from '../controllers/dietController';
-
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
 
 const router = Router();
 
