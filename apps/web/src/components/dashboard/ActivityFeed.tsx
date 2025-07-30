@@ -1,24 +1,24 @@
 "use client"
 
-import { Box, VStack, HStack, Text, Icon, Avatar } from "@chakra-ui/react"
+import { Box, VStack, HStack, Text, Icon } from "@chakra-ui/react"
 import { FiActivity, FiTrendingUp, FiTarget, FiCalendar } from "react-icons/fi"
 
 interface Activity {
   id: string
-  type: "workout" | "goal" | "achievement" | "reminder"
-  title: string
-  description: string
-  time: string
+  tipo: "workout" | "goal" | "achievement" | "reminder"
+  titulo: string
+  descricao: string
+  tempo: string
   icon?: any
 }
 
 interface ActivityFeedProps {
-  title: string
+  titulo: string
   activities: Activity[]
 }
 
-const getActivityIcon = (type: Activity["type"]) => {
-  switch (type) {
+const getActivityIcon = (tipo: Activity["tipo"]) => {
+  switch (tipo) {
     case "workout":
       return FiActivity
     case "goal":
@@ -32,8 +32,8 @@ const getActivityIcon = (type: Activity["type"]) => {
   }
 }
 
-const getActivityColor = (type: Activity["type"]) => {
-  switch (type) {
+const getActivityColor = (tipo: Activity["tipo"]) => {
+  switch (tipo) {
     case "workout":
       return "green.400"
     case "goal":
@@ -47,7 +47,7 @@ const getActivityColor = (type: Activity["type"]) => {
   }
 }
 
-export const ActivityFeed = ({ title, activities }: ActivityFeedProps) => {
+export const ActivityFeed = ({ titulo, activities }: ActivityFeedProps) => {
   return (
     <Box
       bg="gray.800"
@@ -57,7 +57,7 @@ export const ActivityFeed = ({ title, activities }: ActivityFeedProps) => {
       p={6}
     >
       <Text fontSize="lg" fontWeight="bold" color="white" mb={6}>
-        {title}
+        {titulo}
       </Text>
       
       <VStack spacing={4} align="stretch">
@@ -65,28 +65,28 @@ export const ActivityFeed = ({ title, activities }: ActivityFeedProps) => {
           <HStack key={activity.id} spacing={4} p={3} bg="gray.700" borderRadius="lg">
             <Box
               p={2}
-              bg={getActivityColor(activity.type)}
+              bg={getActivityColor(activity.tipo)}
               borderRadius="lg"
               opacity={0.2}
             >
               <Icon
-                as={getActivityIcon(activity.type)}
+                as={getActivityIcon(activity.tipo)}
                 boxSize={4}
-                color={getActivityColor(activity.type)}
+                color={getActivityColor(activity.tipo)}
               />
             </Box>
             
             <VStack align="start" spacing={1} flex={1}>
               <Text fontSize="sm" fontWeight="medium" color="white">
-                {activity.title}
+                {activity.titulo}
               </Text>
               <Text fontSize="xs" color="gray.400">
-                {activity.description}
+                {activity.descricao}
               </Text>
             </VStack>
             
             <Text fontSize="xs" color="gray.500">
-              {activity.time}
+              {activity.tempo}
             </Text>
           </HStack>
         ))}

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiTarget } from 'react-icons/fi';
 
 export default function LoginPage() {
-  const { setToken } = useAuth();
+  const { setToken, setUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ export default function LoginPage() {
                   const data = await loginApi(email, password);
                   if (data.token) {
                     setToken(data.token);
+                    setUser(data.user);
                     localStorage.setItem('token', data.token);
                     navigate('/dashboard');
                   } else {

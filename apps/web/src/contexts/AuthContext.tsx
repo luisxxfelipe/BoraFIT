@@ -2,19 +2,22 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 
 export interface User {
   id: number;
-  name: string;
+  nome: string;
   email: string;
-  height: number;
-  type: string;
-  weight: number;
-  goal: string;
-  daysPerWeek: number;
+  senha: string;
+  altura: number;
+  peso: number;
+  objetivo: string;
+  diasSemana: number;
+  tipo: string;
+  fotoPerfil: string | null;
 }
 
 interface AuthContextType {
   token: string | null;
   user: User | null;
   setToken: (token: string | null) => void;
+  setUser: (user: User | null) => void;
   isAuthenticated: boolean;
   logout: () => void;
 }
@@ -23,14 +26,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
-  const [user] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const isAuthenticated = !!token;
   const logout = () => {
     setToken(null);
     localStorage.removeItem('token');
   };
   return (
-    <AuthContext.Provider value={{ token, setToken, isAuthenticated, logout, user }}>
+    <AuthContext.Provider value={{ token, setToken, isAuthenticated, logout, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
