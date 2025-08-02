@@ -16,23 +16,23 @@ export const Sidebar = () => {
   const nomeUsuario = user && user.nome && user.nome.trim() !== '' ? user.nome : 'Usuário';
 
   const sidebarItems = [
-    { icon: FiHome, label: 'Dashboard', isActive: true },
-    { icon: FiUser, label: 'Perfil' },
-    { icon: FiActivity, label: 'Treinos' },
-    { icon: FiHeart, label: 'Dieta' },
-    { icon: FiUsers, label: 'Ranking/Amigos' },
+    { icon: FiHome, label: 'Dashboard', to: '/dashboard', isActive: true },
+    { icon: FiUser, label: 'Perfil', to: '/perfil' },
+    { icon: FiActivity, label: 'Treinos', to: '/treinos' },
+    { icon: FiHeart, label: 'Dieta', to: '/dieta' },
+    { icon: FiUsers, label: 'Ranking/Amigos', to: '/ranking' },
     {
       icon: FiFileText,
       label: 'Relatórios',
       hasSubmenu: true,
       submenuItems: [
-        { icon: FiFileText, label: 'Evolução Mensal' },
-        { icon: FiAward, label: 'Conquistas' },
+        { icon: FiFileText, label: 'Evolução Mensal', to: '/relatorios/evolucao' },
+        { icon: FiAward, label: 'Conquistas', to: '/relatorios/conquistas' },
       ],
     },
-    { icon: FiMessageSquare, label: 'Chat IA' },
-    { icon: FiCalendar, label: 'Agenda' },
-    { icon: FiSettings, label: 'Configurações' },
+    { icon: FiMessageSquare, label: 'Chat IA', to: '/chat' },
+    { icon: FiCalendar, label: 'Agenda', to: '/agenda' },
+    { icon: FiSettings, label: 'Configurações', to: '/configuracoes' },
   ];
 
   return (

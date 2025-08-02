@@ -35,7 +35,7 @@ export default function RegisterPage() {
   return (
     <Flex minH="100vh" minW="100vw" bg="#18181b">
       <Flex flex={1} align="center" justify="center">
-        <Box rounded="xl" bg="#23232a" boxShadow="0 0 24px #a259ff" p={10} w="700px">
+        <Box rounded="xl" bg="#23232a" boxShadow="0 0 12px #a259ff" p={10} w="700px">
           <Stack spacing={5} align="center">
             <Heading fontSize="2xl" textAlign="center" color="#a259ff">Cadastro BoraFIT</Heading>
             <Box w="100%">
