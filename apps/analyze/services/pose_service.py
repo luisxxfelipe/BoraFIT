@@ -9,6 +9,7 @@ def analyze_pose(img: np.ndarray):
     return results
 
 def extract_landmarks(results):
+    min_vis = 0.3  # Considera landmarks com visibilidade acima de 0.3
     if results.pose_landmarks:
         return [
             {
@@ -17,6 +18,6 @@ def extract_landmarks(results):
                 "z": lm.z,
                 "visibility": lm.visibility
             }
-            for lm in results.pose_landmarks.landmark
+            for lm in results.pose_landmarks.landmark if lm.visibility >= min_vis
         ]
     return []

@@ -29,10 +29,8 @@ app.use('/api/workouts', workoutRoutes);
 app.use('/api/diets', dietRoutes);
 app.use('/api/ranking', rankingRoutes);
 app.use('/api/friends', friendRoutes);
-
-app.use('/api/friends', friendInviteRoutes);
-
-app.use('/api/utils', monthlyResetRoutes);
+app.use('/api/friend-invite', friendInviteRoutes);
+app.use('/api/monthly-reset', monthlyResetRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

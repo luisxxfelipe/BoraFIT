@@ -11,8 +11,11 @@ export const WebcamLiveIA: React.FC<WebcamLiveIAProps> = ({ onAddPose, finalizad
   const webcamRef = useRef<Webcam>(null);
   const orientacoes = [
     'Pose 1: Fique de frente para a câmera, braços relaxados ao lado do corpo.',
-    'Pose 2: Fique de lado (perfil), braços relaxados.',
-    'Pose 3: Fique de costas para a câmera, postura ereta.'
+    'Pose 2: Fique de lado (perfil direito), braços relaxados.',
+    'Pose 3: Fique de costas para a câmera, postura ereta.',
+    'Pose 4: Fique de lado (perfil esquerdo), braços relaxados.',
+    'Pose 5: Agache de frente para a câmera, braços à frente.',
+    'Pose 6: Fique de frente, braços erguidos acima da cabeça.'
   ];
   const [poseIndex, setPoseIndex] = useState(0);
   const [timer, setTimer] = useState(5);
@@ -53,7 +56,7 @@ export const WebcamLiveIA: React.FC<WebcamLiveIAProps> = ({ onAddPose, finalizad
     }
   };
 
-  // Só permite capturar se ainda não capturou todas as poses
+  // Só permite capturar se ainda não capturou todas as poses (até 6)
   const podeCapturar = poseIndex < orientacoes.length && capturedCount === poseIndex;
 
   return (

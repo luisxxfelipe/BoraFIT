@@ -1,9 +1,12 @@
+import type { NovaFichaIAData, PoseData } from "../components/treinos/NovaFichaModal";
 
-export async function analyzePosesIA({ restricoes, preferencias, poses }: { restricoes: string, preferencias: number | undefined, poses: any[] }) {
-  const response = await fetch('http://localhost:3000/analyze', {
+import { API_URLS } from '../config/api';
+
+export async function analyzePosesIA(data: NovaFichaIAData & { poses: PoseData[] }) {
+  const response = await fetch(API_URLS.analyzeIA, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ restricoes, preferencias, poses }),
+    body: JSON.stringify(data),
   });
   return await response.json();
 }
